@@ -1,2 +1,6 @@
 requests==2.31.0
 python-dotenv==1.0.1
+edge-tts>=7.2.7
+moviepy>=2.2.1
+Pillow>=11.3.0
+imageio[pyav,opencv]>=2.37.2
