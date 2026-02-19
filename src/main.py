@@ -1,13 +1,16 @@
 import sys
 import time
+import os
+
+# Add project root to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import pipeline steps
-from step1_init import initialize_project
-from step2_story import generate_story
-from step3_audio import generate_audio
-from step4_video import generate_video
-from step5_compose import compose_final_video
-
+from src.pipeline.step1_init import initialize_project
+from src.pipeline.step2_story import generate_story
+from src.pipeline.step3_audio import generate_audio
+from src.pipeline.step4_video import generate_video
+from src.pipeline.step5_compose import compose_final_video
 def main():
     print("=" * 50)
     print("🎬 Automated Video Generator Pipeline Started")
@@ -59,4 +62,7 @@ def main():
     print("=" * 50)
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--dry-run":
+        print("Dry run successful. No missing imports or pathing issues.")
+        sys.exit(0)
     main()

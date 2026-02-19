@@ -1,10 +1,15 @@
 import os
 from datetime import datetime
+import sys
+
+# Ensure config can be imported from parent
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from config.config import WORKSPACE_DIR
 
 def initialize_project():
     """Creates the timestamped project directory and all necessary subfolders."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    project_dir = f"project_{timestamp}"
+    project_dir = os.path.join(WORKSPACE_DIR, f"project_{timestamp}")
     
     directories = [
         "scripts",

@@ -1,7 +1,11 @@
 import os
 import json
 import requests
-import config
+import sys
+
+# Ensure config can be imported from parent
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from config import config
 
 def generate_story(project_dir, topic="A brave little fox named Finley on a magical starry adventure."):
     """Generates a 120-scene story using OpenRouter's API."""

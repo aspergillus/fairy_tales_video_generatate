@@ -4,7 +4,5 @@ __pycache__/
 *.pyo
 venv/
 .venv/
-audio_chunks/
-video_chunks/
-final_render/
-.agents/
+# .agents/
+workspace/

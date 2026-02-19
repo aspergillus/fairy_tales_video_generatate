@@ -1,0 +1,41 @@
+# Fairy Tale Video Generator - Project Overview
+
+## Working Tree (Current Directory)
+
+```
+fairy_tales_video_generatate/
+├── .env                  # Environment variables file
+├── .git/                 # Git repository configuration and history
+├── .gitignore            # Specifies intentionally untracked files to ignore for Git
+├── README.md             # Standard project readme
+├── requirements.txt      # Python dependencies block
+├── config.py             # Configuration settings for the generation pipeline
+├── main.py               # Main entry point for the application
+├── generate.py           # Core logic handling the multi-step generation
+├── step1_init.py         # Script to initialize directories and project structures
+├── step2_story.py        # Script to generate story chunks and visual prompts
+├── step3_audio.py        # Script to synthesize TTS audio narratives
+├── step4_video.py        # Script to create video segments from the visual prompts
+├── step5_compose.py      # Script to combine video and audio chunks into the final video
+├── task.md               # Tracking checklist for development
+├── workflow.md           # Defined workflow description
+├── audio_chunks/         # Output directory for synthesized audio segments
+├── video_chunks/         # Output directory for generated video segments
+├── final_render/         # Output directory for the composed final video
+├── scripts/              # Directory containing the generated story.json file
+└── __pycache__/          # Python byte code cache
+```
+
+## Description of Individual Scripts
+
+### Core Pipeline Scripts
+- **`step1_init.py`**: Handles initialization tasks. It ensures necessary output folders (like `audio_chunks`, `video_chunks`, `final_render`) are created before generation begins.
+- **`step2_story.py`**: Reaches out to the LLM to generate the fairy tale story script cut into ~5-second chunks. Each chunk contains a narration and an AI video generative prompt.
+- **`step3_audio.py`**: Uses Text-to-Speech (TTS) to process the story fragments, narrating them and outputting `.mp3` or `.wav` files into the `audio_chunks` directory.
+- **`step4_video.py`**: Connects to the video generation API, consuming the visual prompts created in Step 2 to render the visual portions of the video. Outputs clips into `video_chunks`.
+- **`step5_compose.py`**: Takes the audio segments and corresponding video segments, aligning and assembling them sequentially to compose the final storyboard video inside `final_render`.
+
+### Entry and Configuration Scripts
+- **`main.py`**: The top-level script that is meant to be run by the user. It triggers the entire pipeline.
+- **`generate.py`**: Orchestrates the distinct steps, sequentially calling `step1_init.py` through `step5_compose.py`.
+- **`config.py`**: A centralized place to store API configurations, paths, format instructions, and environmental setup variables used across all steps.
